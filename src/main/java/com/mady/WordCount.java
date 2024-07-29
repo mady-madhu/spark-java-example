@@ -3,6 +3,7 @@ package com.mady;
 
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.List;
 
 import scala.Tuple2;
 
@@ -47,7 +48,13 @@ public class WordCount {
             public Integer call(Integer x, Integer y) {
                 return x + y;
             }
-        }, 1);
+        });
+
+        //printing on console after collecting
+        List<Tuple2<String, Integer>> output = counts.collect();
+        for (Tuple2<?,?> tuple : output) {
+            System.out.println(tuple._1() + ": " + tuple._2());
+        }
         // Save the word count back out to a text file, causing evaluation.
         counts.saveAsTextFile(outputFile);
 
